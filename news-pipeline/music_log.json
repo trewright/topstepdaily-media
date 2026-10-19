@@ -1,0 +1,46 @@
+{
+  "tracks": {
+    "01": "Gold Medals 01 148bpm Dbm",
+    "02": "Gold Medals 02 160bpm Fm",
+    "03": "Gold Medals 03 117bpm Fm",
+    "04": "Gold Medals 04 165bpm Dm",
+    "05": "Gold Medals 05 140bpm Dm",
+    "06": "Gold Medals 06 155bpm Ebm",
+    "07": "Gold Medals 07 130bpm Em",
+    "08": "Gold Medals 08 106bpm Fm",
+    "09": "Gold Medals 09 155bpm Am",
+    "10": "Gold Medals 10 145bpm Bm"
+  },
+  "clip_start_seconds": {
+    "01": 11.351,
+    "02": 9.0,
+    "03": 14.359,
+    "04": 8.727,
+    "05": 10.286,
+    "06": 9.29,
+    "07": 12.923,
+    "08": 18.113,
+    "09": 9.29,
+    "10": 9.931
+  },
+  "order": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10"
+  ],
+  "last_used": "08",
+  "history": [
+    {
+      "date": "2026-10-19",
+      "track": "08",
+      "post": "cricket"
+    }
+  ]
+}

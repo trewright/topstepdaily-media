@@ -1,0 +1,130 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:BC;font-style:italic;font-weight:500;src:url(fonts/barlow-condensed-latin-500-italic.woff2)}
+@font-face{font-family:BC;font-style:italic;font-weight:600;src:url(fonts/barlow-condensed-latin-600-italic.woff2)}
+@font-face{font-family:BC;font-style:italic;font-weight:700;src:url(fonts/barlow-condensed-latin-700-italic.woff2)}
+@font-face{font-family:BC;font-style:italic;font-weight:800;src:url(fonts/barlow-condensed-latin-800-italic.woff2)}
+:root{--bg:#0c0f18;--band:#101821;--lime:#c6f232;--white:#f1f3ee;--mute:#9aa3ad}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--bg);overflow:hidden;font-family:BC,"Barlow Condensed",sans-serif;font-style:italic}
+#stage{position:relative;width:1080px;height:1920px;background:var(--bg);overflow:hidden}
+/* step motif bands */
+.motif{position:absolute;left:0;width:1080px;height:200px;overflow:hidden}
+.motif.top{top:0}
+.motif.bot{bottom:0;transform:scaleY(-1)}
+.motif i{position:absolute;top:0;width:74px;background:var(--band);transform:skewX(-14deg);display:block}
+/* content block, vertically centered (380 -> 1542) */
+#block{position:absolute;left:100px;width:880px;top:380px;height:1162px;display:flex;flex-direction:column;justify-content:space-between}
+#hdr{display:flex;justify-content:space-between;align-items:center;height:56px}
+#brand{display:flex;align-items:center;gap:16px;color:var(--lime);font-weight:800;font-size:50px;letter-spacing:.02em;text-transform:uppercase}
+#icon{position:relative;width:76px;height:46px}
+#icon b{position:absolute;bottom:0;display:block}
+#days{color:var(--white);font-weight:600;font-size:36px;letter-spacing:.08em;text-transform:uppercase}
+#src{color:var(--mute);font-weight:500;font-size:25px;letter-spacing:.12em;text-transform:uppercase;margin-top:-2px}
+#head{color:var(--white);font-weight:800;font-size:128px;line-height:.94;text-transform:uppercase;letter-spacing:-.005em}
+#head .ln{display:block;overflow:hidden}
+#head .ln span{display:inline-block;white-space:nowrap}
+#panel{position:relative;width:880px;height:420px;overflow:hidden;border-radius:6px;background:#000}
+#panelImg{position:absolute;left:0;top:0;width:880px;height:420px;background:url(panel.jpg) center/cover no-repeat;transform-origin:44% 62%}
+#panelShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,15,24,.10) 0%,rgba(12,15,24,.05) 45%,rgba(12,15,24,.78) 100%)}
+#tag{position:absolute;left:0;bottom:26px;background:var(--lime);color:#0c0f18;font-weight:800;font-size:46px;letter-spacing:.03em;text-transform:uppercase;padding:6px 30px 8px 24px;transform-origin:0 50%}
+#credit{position:absolute;right:12px;bottom:8px;color:rgba(241,243,238,.78);font-weight:500;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+#rows{display:flex;flex-direction:column;gap:12px}
+.row{position:relative;display:flex;align-items:center;height:58px;padding-left:26px;color:var(--white);font-weight:700;font-size:37px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.row .tick{position:absolute;left:0;top:4px;bottom:4px;width:7px;background:var(--lime);transform-origin:50% 0}
+.row em{font-style:italic;color:var(--lime)}
+#foot{text-align:center}
+#foot .t{color:var(--white);font-weight:800;font-size:54px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+#foot .t span{color:var(--lime)}
+#foot .s{color:var(--mute);font-weight:600;font-size:21px;letter-spacing:.34em;text-transform:uppercase;margin-top:10px}
+</style></head>
+<body>
+<div id="stage">
+  <div class="motif top" id="mt"></div>
+  <div class="motif bot" id="mb"></div>
+  <div id="block">
+    <div id="hdr">
+      <div id="brand"><div id="icon"><b style="left:0;width:22px;height:16px;background:#f1f3ee"></b><b style="left:27px;width:22px;height:46px;background:#c6f232"></b><b style="left:54px;width:22px;height:28px;background:#f1f3ee"></b></div><span id="label">News</span></div>
+      <div id="days"></div>
+    </div>
+    <div id="src"></div>
+    <div id="head"><span class="ln"><span></span></span><span class="ln"><span></span></span></div>
+    <div id="panel">
+      <div id="panelImg"></div><div id="panelShade"></div>
+      <div id="tag"></div>
+      <div id="credit"></div>
+    </div>
+    <div id="rows"></div>
+    <div id="foot"><div class="t">Top <span>Step</span> Daily</div><div class="s">Chasing the podium</div></div>
+  </div>
+</div>
+<script>
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo3=x=>1-Math.pow(1-x,3);
+const eoB=x=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+// motif bars
+(function(){
+  const hs=[70,120,95,150,80,135,110,160,90,125,100,140,85,155];
+  ['mt','mb'].forEach(id=>{const el=document.getElementById(id);
+    for(let i=0;i<hs.length;i++){const d=document.createElement('i');d.style.left=(i*80-30)+'px';d.style.height=hs[i]+'px';el.appendChild(d);}
+  });
+})();
+const $=id=>document.getElementById(id);
+const E={hdr:$('hdr'),src:$('src'),l1:document.querySelectorAll('#head .ln span')[0],l2:document.querySelectorAll('#head .ln span')[1],
+  panel:$('panel'),img:$('panelImg'),tag:$('tag'),credit:$('credit'),rows:[...document.querySelectorAll('.row')],foot:$('foot')};
+function render(t,final){
+  const p=(a,b)=>final?1:seg(t,a,b);
+  // header
+  let k=eo3(p(0.10,0.50)); E.hdr.style.opacity=k; E.hdr.style.transform=`translateY(${(1-k)*-24}px)`;
+  k=eo3(p(0.30,0.65)); E.src.style.opacity=k;
+  // headline lines
+  k=eo3(p(0.40,0.90)); E.l1.style.transform=`translateY(${(1-k)*125}px)`; E.l1.style.opacity=clamp(k*2);
+  k=eo3(p(0.55,1.05)); E.l2.style.transform=`translateY(${(1-k)*125}px)`; E.l2.style.opacity=clamp(k*2);
+  // photo panel wipe
+  k=eo3(p(0.85,1.55)); E.panel.style.clipPath=`inset(0 ${(1-k)*100}% 0 0)`;
+  // ken burns (always running, independent of final)
+  const kb=clamp(t/10); const sc=1.0+0.16*kb; const px=-30*kb;
+  E.img.style.transform=`translateX(${px}px) scale(${sc})`;
+  // tag
+  k=eoB(p(1.55,1.95)); E.tag.style.transform=`translateX(${(1-k)*-520}px)`; E.tag.style.opacity=clamp(p(1.55,1.75)*2);
+  E.credit.style.opacity=eo3(p(1.9,2.3));
+  // rows
+  const st=[2.05,2.5,2.95];
+  E.rows.forEach((r,i)=>{
+    const kk=eo3(p(st[i],st[i]+0.45));
+    r.style.opacity=clamp(kk*1.6); r.style.transform=`translateX(${(1-kk)*-70}px)`;
+    r.querySelector('.tick').style.transform=`scaleY(${eo3(p(st[i]+0.05,st[i]+0.45))})`;
+  });
+  // footer
+  k=eo3(p(3.5,4.0)); E.foot.style.opacity=k; E.foot.style.transform=`translateY(${(1-k)*22}px)`;
+}
+
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function fitWidth(el,maxW,start,min){let fs=start;el.style.fontSize=fs+'px';while(fs>min&&el.getBoundingClientRect().width>maxW){fs-=1;el.style.fontSize=fs+'px';}return fs;}
+function setup(D){
+  $('days').textContent=D.days+' days out';
+  $('label').textContent=D.label||'News';
+  $('src').textContent=D.source;
+  const spans=document.querySelectorAll('#head .ln span');
+  spans[0].textContent=D.line1; spans[1].textContent=D.line2;
+  const f1=fitWidth(spans[0],880,128,70), f2=fitWidth(spans[1],880,128,70);
+  $('head').style.fontSize=Math.min(f1,f2)+'px'; spans[0].style.fontSize=''; spans[1].style.fontSize='';
+  $('tag').textContent=D.tag; fitWidth($('tag'),840,46,28);
+  $('credit').textContent=D.credit; fitWidth($('credit'),640,16,11);
+  $('panelImg').style.transformOrigin=D.focus||'50% 50%';
+  const rows=$('rows'); rows.innerHTML='';
+  D.rows.forEach(t=>{const r=document.createElement('div');r.className='row';
+    const parts=String(t).split('*');
+    const inner=parts.map((p,i)=>i%2?'<em>'+esc(p)+'</em>':esc(p)).join('');
+    r.innerHTML='<div class="tick"></div><div class="rt">'+inner+'</div>';rows.appendChild(r);
+  });
+  const fs=Math.min(...[...rows.querySelectorAll('.rt')].map(e=>fitWidth(e,850,37,26)));
+  rows.querySelectorAll('.rt').forEach(e=>e.style.fontSize=fs+'px');
+  E.rows=[...document.querySelectorAll('.row')];
+  E.l1=spans[0];E.l2=spans[1];
+  render(10,true);
+}
+</script>
+</body></html>
