@@ -35,7 +35,7 @@
     "09",
     "10"
   ],
-  "last_used": "09",
+  "last_used": "10",
   "history": [
     {
       "date": "2026-10-19",
@@ -46,6 +46,11 @@
       "date": "2026-10-20",
       "track": "09",
       "post": "gym-team-japan"
+    },
+    {
+      "date": "2026-10-20",
+      "track": "10",
+      "post": "gym-women-team-final"
     }
   ]
 }
