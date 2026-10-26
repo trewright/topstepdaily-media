@@ -35,7 +35,7 @@
     "09",
     "10"
   ],
-  "last_used": "08",
+  "last_used": "02",
   "history": [
     {
       "date": "2026-10-19",
@@ -91,6 +91,26 @@
       "date": "2026-10-26",
       "track": "08",
       "post": "gym-men-pbars-zou"
+    },
+    {
+      "date": "2026-10-26",
+      "track": "09",
+      "post": "gym-women-beam-nemour"
+    },
+    {
+      "date": "2026-10-26",
+      "track": "10",
+      "post": "gym-men-vault-davtyan"
+    },
+    {
+      "date": "2026-10-26",
+      "track": "01",
+      "post": "gym-men-hbar-tang"
+    },
+    {
+      "date": "2026-10-26",
+      "track": "02",
+      "post": "gym-men-hbar-tang"
     }
   ]
 }
