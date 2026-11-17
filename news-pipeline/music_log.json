@@ -35,7 +35,7 @@
     "09",
     "10"
   ],
-  "last_used": "03",
+  "last_used": "04",
   "history": [
     {
       "date": "2026-10-19",
@@ -166,6 +166,11 @@
       "date": "2026-11-13",
       "track": "03",
       "post": "athletics-qualification-standards-2028"
+    },
+    {
+      "date": "2026-11-17",
+      "track": "04",
+      "post": "cricket-qualifiers-hosts-2028"
     }
   ]
 }
