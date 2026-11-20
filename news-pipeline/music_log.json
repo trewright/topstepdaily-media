@@ -35,7 +35,7 @@
     "09",
     "10"
   ],
-  "last_used": "04",
+  "last_used": "05",
   "history": [
     {
       "date": "2026-10-19",
@@ -171,6 +171,11 @@
       "date": "2026-11-17",
       "track": "04",
       "post": "cricket-qualifiers-hosts-2028"
+    },
+    {
+      "date": "2026-11-20",
+      "track": "05",
+      "post": "baseball-npb-pause-2028"
     }
   ]
 }
